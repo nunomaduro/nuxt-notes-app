@@ -4,7 +4,7 @@
   const notes = getNotes();
 </script>
 <template>
-  <h1>
+  <h1 class="text-3xl font-bold underline">
      Notes App
   </h1>
   <ul v-for="note in notes" :key="note.id">
