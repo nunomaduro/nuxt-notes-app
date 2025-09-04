@@ -7,3 +7,9 @@ export function getNotes(): Note[] {
     { id: 3, title: 'Third note', content: 'This is the third note' },
   ]
 }
+
+export function getNoteById(id: number): Note | null {
+    const notes = getNotes()
+
+    return notes.find((note) => note.id === id) || null;
+}
