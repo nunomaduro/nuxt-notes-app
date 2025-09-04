@@ -1,7 +1,14 @@
 <script setup lang="ts">
-  import { getNotes } from "~/repositories/notes";
+import {getNotes, getNotesByQuery} from "~/repositories/notes";
 
-  const notes = getNotes();
+  let notes = getNotes();
+  const search = ref('');
+
+  // re-fetch the notes whenever the search term changes
+  watch(search, (newSearch) => {
+    notes = getNotesByQuery(newSearch);
+  });
+
 </script>
 <template>
   <section class="p-6 sm:p-10">
@@ -10,6 +17,15 @@
         Barber's Ledger
       </h1>
       <p class="mt-2 text-neutral-600">Where every cut has a note and every note tells a story.</p>
+    </div>
+
+    <div>
+      <input
+        v-model="search"
+        type="text"
+        placeholder="Search notes..."
+        class="w-full mb-6 p-3 rounded-lg border-2 border-neutral-900/70 focus:border-blue-700 focus:ring-2 focus:ring-blue-300 transition"
+      />
     </div>
 
     <div class="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2">
